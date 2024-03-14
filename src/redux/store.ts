@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/auth/authSlice";
 import { baseApi } from "./api/baseApi";
 import storage from 'redux-persist/lib/storage' 
-import { persistReducer, persistStore } from "redux-persist";
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
 const persistConfig = {
     key: 'auth',
     storage
@@ -13,7 +13,11 @@ export const store = configureStore({
         [baseApi.reducerPath]:baseApi.reducer,
         auth: persistedAuthReducer
     },
-    middleware: grtDefaultMiddlewares => grtDefaultMiddlewares().concat(baseApi.middleware)
+    middleware: grtDefaultMiddlewares => grtDefaultMiddlewares({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+    }).concat(baseApi.middleware)
 })
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
