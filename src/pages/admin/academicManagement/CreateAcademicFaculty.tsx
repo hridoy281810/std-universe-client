@@ -6,16 +6,18 @@ import { Button, Col, Flex } from "antd";
 import StdUniSelect from "../../../components/form/StdUniSelect";
 import { facultyOptions } from "../../../components/constants/faculties";
 import StdUniForm from "../../../components/form/StdUniForm";
-import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicManagement.api";
+import { useAddAcademicFacultyMutation, useGetAllFacultyQuery } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { TAcademicFaculty, TResponse } from "../../../typs";
+import {  TAcademicFaculty, TResponse } from "../../../typs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicFacultySchema } from "../../../schemas/AcademicManagement.Schena";
+
 
 // }
 const CreateAcademicFaculty = () => {
   const [addAcademicFaculty]= useAddAcademicFacultyMutation()
+  // const { refetch } = useGetAllFacultyQuery(undefined, { enabled: false });
   const onSubmit:SubmitHandler<FieldValues> = async(data)=> {
     const toastId = toast.loading("Creating...")
     const facultyData= {
@@ -28,6 +30,7 @@ const CreateAcademicFaculty = () => {
       toast.error(res.error.data.message,{id:toastId})
     }else{
       toast.success("Faculty Created",{id:toastId})
+ 
     }
     
   }catch(error){

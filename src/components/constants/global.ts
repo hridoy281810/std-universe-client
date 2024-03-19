@@ -7,3 +7,5 @@ export const monthOptions =monthNames.map((item)=> ({
     value: item,
     label:item
 }))
+
+export const genders = ["Male", "Female", "Other"]

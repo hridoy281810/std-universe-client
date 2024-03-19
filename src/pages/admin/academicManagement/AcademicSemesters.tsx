@@ -1,5 +1,5 @@
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagement.api";
-import React, { useState } from 'react';
+import{ useState } from 'react';
 import { Button, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { TAcademicSemester } from "../../../typs/academicManagement.type";
