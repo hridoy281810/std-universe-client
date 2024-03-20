@@ -1,3 +1,4 @@
+
 export type TAcademicSemester = {
     _id: string
     name: string
@@ -15,4 +16,13 @@ export type TAcademicSemester = {
     createdAt: string,
     updatedAt:string,
     __v:number,
-      }
+      } 
+
+export type TAcademicDepartment = {
+  _id: string,
+  name: string,
+  academicFaculty:string,
+  createdAt: string,
+  updatedAt:string,
+  __v:number,
+}

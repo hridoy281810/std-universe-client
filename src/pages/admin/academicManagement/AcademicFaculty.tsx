@@ -5,7 +5,7 @@ type TTableData ={
   name:string
 }
 const AcademicFaculty = () => {
-  const {data: facultyData,isFetching,isLoading,refetch} = useGetAllFacultyQuery(undefined)
+  const {data: facultyData,isFetching,isLoading} = useGetAllFacultyQuery(undefined,{refetchOnMountOrArgChange:true})
   console.log(isFetching,isLoading);
   
   const tableData = facultyData?.data?.map(({_id,name},index )=> ({
@@ -42,7 +42,7 @@ const columns: TableColumnsType<TTableData> = [
   }
   return (
  
-      <Table loading={isFetching} columns={columns} dataSource={tableData}  />
+      <Table  columns={columns} dataSource={tableData}  />
    
   );
 };

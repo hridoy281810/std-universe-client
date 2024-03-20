@@ -8,9 +8,9 @@ type TInputProps = {
 const StdUniInput = ({type,name,label}: TInputProps) => {
   return (
     <div style={{marginBottom: "20px"}}>
-    {/* <p style={{marginBottom: '10px'}}>{label ? label: null}</p> */}
    <Controller name={name} render={({field})=> <Form.Item label={label}>
-   <Input {...field} type={type} id={name} />
+   <Input {...field} type={type} id={name}    style={{ width: "100%" }}
+     size='large'/>
    </Form.Item> } />
     </div>
   );

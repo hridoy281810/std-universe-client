@@ -24,7 +24,7 @@ const CreateAcademicFaculty = () => {
             name: data.name
     }
   try{
-    const res = await addAcademicFaculty(facultyData) as TResponse<TAcademicFaculty>
+    const res = (await addAcademicFaculty(facultyData)) as TResponse<TAcademicFaculty>
     console.log(res);
     if(res.error){
       toast.error(res.error.data.message,{id:toastId})

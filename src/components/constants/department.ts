@@ -1,0 +1,37 @@
+export const departmentNames = [
+    "Department of Engineering",
+    "Department of Programming",
+    "Department of Medicine",
+    "Department of Law",
+    "Department of Business Administration",
+    "Department of Arts and Humanities",
+    "Department of Science",
+    "Department of Social Sciences",
+    "Department of Education",
+    "Department of Architecture",
+    "Department of Agriculture",
+    "Department of Information Technology",
+    "Department of Environmental Sciences",
+    "Department of Economics",
+    "Department of Pharmacy",
+    "Department of Dentistry",
+    "Department of Fine Arts",
+    "Department of Communication",
+    "Department of Mathematics",
+    "Department of Nursing",
+    "Department of Veterinary Medicine",
+    "Department of Psychology",
+    "Department of Music",
+    "Department of Political Science",
+    "Department of Linguistics",
+    "Department of History",
+    "Department of Geology",
+    "Department of Anthropology",
+    "Department of Philosophy",
+    "Department of Sociology",
+    "Department of Statistics"
+];
+export const departmentOptions =departmentNames.map((item)=> ({
+    value: item,
+    label:item
+}))
