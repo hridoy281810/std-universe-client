@@ -1,12 +1,13 @@
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import StdUniForm from "../../../components/form/StdUniForm";
 import StdUniInput from "../../../components/form/StdUniInput";
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import StdUniSelect from "../../../components/form/StdUniSelect";
 import { bloodGroupsOptions, gendersOption } from "../../../components/constants/global";
 import StdUniDatePicker from "../../../components/form/StdUniDatePicker";
 import { useGetAllDepartmentQuery, useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
+
 
 const studentDummyData = {
   "password": "student123",
@@ -18,9 +19,8 @@ const studentDummyData = {
       },
       "gender": "male",
       "dateOfBirth": "1990-01-01",
-      "bloogGroup": "A+",
+      "bloodGroup": "A+",
 
-      "email": "student2@gmail.com",
       "contactNo": "1235678",
       "emergencyContactNo": "987-654-3210",
       "presentAddress": "123 Main St, Cityville",
@@ -52,7 +52,6 @@ const  studentDefaultValues = {
     },
     "gender": "male",
 
-    "email": "student2@gmail.com",
     "contactNo": "1235678",
     "emergencyContactNo": "987-654-3210",
     "presentAddress": "123 Main St, Cityville",
@@ -88,7 +87,7 @@ const departmentOptions =dData?.data?.map((item)=>({
   value: item._id,
   label: item.name
 }))
-  const onSubmit : SubmitHandler<FieldValues>=(data)=>{
+  const onSubmit : SubmitHandler<FieldValues>=async(data)=>{
     console.log(data);
     const studentData = {
       password:'student123',
@@ -96,8 +95,9 @@ const departmentOptions =dData?.data?.map((item)=>({
     }
     const formData = new FormData()
  formData.append('data',JSON.stringify(studentData))
+//  formData.append('file', data.profileImg)
  addStudent(formData)
- console.log(Object.fromEntries(formData));
+ 
   }
   return (
     
@@ -122,8 +122,20 @@ const departmentOptions =dData?.data?.map((item)=>({
         <StdUniDatePicker name="dateOfBirth"  label="Date of Birth"/>
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
-        <StdUniSelect options={bloodGroupsOptions} name="bloodGroup" label="Blood Group" />
+        <StdUniSelect options={bloodGroupsOptions} name="bloogGroup" label="Blood Group" />
         </Col>
+        {/* <Col span={24} md={{span: 12}} lg={{span: 8}}>
+        <Controller name="profileImg" render={({field: {onChange,value, ...field}})=> (
+          <Form.Item label="Picture">
+            <Input type="file"
+            value={value?.fileName}  
+            {...field} 
+            onChange={(e)=> onChange(e.target.files?.[0])}
+            />
+          </Form.Item>
+
+        )}/>
+        </Col> */}
       </Row>
         <Divider>Contact Info</Divider>
       <Row gutter={8}>
