@@ -16,4 +16,4 @@ export type TUserPaths = {
     label: ReactNode,
     children?:TSidebarItem[]
   
-  }
+  } | undefined

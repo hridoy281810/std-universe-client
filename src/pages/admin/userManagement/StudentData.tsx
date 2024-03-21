@@ -3,6 +3,7 @@ import { Button, Pagination, Space, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { TQueryParam, TStudent } from "../../../typs";
 import { useGetAllStudentQuery, useGetSingleStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { Link } from 'react-router-dom';
 export type TTableData =Pick<TStudent,  "fullName" | "id">
 type TFilter = {
   name:string,
@@ -17,7 +18,7 @@ const StudentData = () => {
     {name: 'sort', value:'id'},
     ...params,
   ])
-  const {getSingleStudent} = useGetSingleStudentQuery(undefined)
+
 const metaData = studentData?.meta;
 console.log(metaData);
 
@@ -50,10 +51,10 @@ const columns: TableColumnsType<TTableData> = [
   {
     title: 'Action',
     key: "X",
-   render:()=>{
+   render:(item)=>{
     return(
       <Space>
-        <Button onClick={()=>getSingleStudent(tableData?.data._id)}>Details</Button>
+        <Link to={`/admin/students-data/${item.key}`}><Button >Details</Button></Link>
         <Button>Update</Button>
         <Button>Block</Button>
       </Space>
