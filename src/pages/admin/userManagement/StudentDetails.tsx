@@ -2,18 +2,19 @@ import { useParams } from 'react-router-dom';
 import { Card, Col, Row } from 'antd';
 import { useGetSingleStudentQuery } from "../../../redux/features/admin/userManagement.api";
 import { TMeta, TStudent } from '../../../typs';
-
+type TData  ={
+    data: TStudent
+    isLoading:boolean
+}
 const StudentDetails = () => {
     const {studentId} = useParams()
-    const {data: studentData,isLoading}  = useGetSingleStudentQuery(studentId)
+    const {data: studentData,isLoading} = useGetSingleStudentQuery<TStudent >(studentId)
   
   if(isLoading){
     return <p>Loading...</p>
   }
   return (
  <>
-{/* gutter={8}>
-        <Col span={24} md={{span: 12}} lg={{span: 8}}></Col> */}
     <Row  gutter={16} >
     <Col style={{ marginTop: 16 }} span={24} md={{span: 12}} lg={{span: 8}}>
       <Card style={{ marginTop: 16 ,height:'100%'}} title="Personal Info" bordered={false}>
