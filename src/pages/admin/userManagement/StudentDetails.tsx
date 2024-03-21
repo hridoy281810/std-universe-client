@@ -42,18 +42,19 @@ const StudentDetails = () => {
        <p>motherOccupation: {studentData?.data.guardian.motherOccupation}</p>
       </Card>
     </Col>
-    <Col style={{ marginTop: 16 }}  span={24} md={{span: 12}} lg={{span: 8}} >
-      <Card  style={{ marginTop: 16 ,height:'100%'}}  title="Academic Info" bordered={false}>
-       <p>Admission Semester: {studentData?.data.admissionSemester.name}</p>
-       <p>Academic Department: {studentData?.data.academicDepartment.name}</p>
-      </Card>
-    </Col>
+    
     <Col style={{ marginTop: 16 }} span={24} md={{span: 12}} lg={{span: 8}} >
-      <Card   style={{ marginTop: 16 ,height:'100%'}}title="Academic Info" bordered={false}>
+      <Card   style={{ marginTop: 16 ,height:'100%'}}title="Local Guardian" bordered={false}>
        <p>fatherName: {studentData?.data.localGuardian.name}</p>
        <p>fatherName: {studentData?.data.localGuardian.contactNo}</p>
        <p>fatherName: {studentData?.data.localGuardian.occupation}</p>
        <p>fatherName: {studentData?.data.localGuardian.address}</p>
+      </Card>
+    </Col>
+    <Col style={{ marginTop: 16 }}  span={24} md={{span: 12}} lg={{span: 8}} >
+      <Card  style={{ marginTop: 16 ,height:'100%'}}  title="Academic Info" bordered={false}>
+       <p>Admission Semester: {studentData?.data.admissionSemester.name}</p>
+       <p>Academic Department: {studentData?.data.academicDepartment.name}</p>
       </Card>
     </Col>
    
