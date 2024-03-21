@@ -1,8 +1,8 @@
 import{ useState } from 'react';
 import { Button, Pagination, Space, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
-import { TQueryParam, TStudent } from "../../../typs";
-import { useGetAllStudentQuery, useGetSingleStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { TQueryParam, TStudent } from "../../../../typs";
+import { useGetAllStudentQuery, useGetSingleStudentQuery } from "../../../../redux/features/admin/userManagement.api";
 import { Link } from 'react-router-dom';
 export type TTableData =Pick<TStudent,  "fullName" | "id">
 type TFilter = {
@@ -55,6 +55,7 @@ const columns: TableColumnsType<TTableData> = [
     return(
       <Space>
         <Link to={`/admin/students-data/${item.key}`}><Button >Details</Button></Link>
+        <Link to={`/admin/update-student-data/${item.key}`}><Button >Update</Button></Link>
         <Button>Update</Button>
         <Button>Block</Button>
       </Space>

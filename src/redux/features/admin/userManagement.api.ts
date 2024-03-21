@@ -1,3 +1,4 @@
+import { SubmitErrorHandler } from "react-hook-form";
 import { TQueryParam, TResponseRedux, TStudent  } from "../../../typs";
 import { baseApi } from "../../api/baseApi";
 
@@ -46,7 +47,24 @@ const userManagementApi = baseApi.injectEndpoints({
               body:data,
           }),
          }),
+         updateStudent: builder.mutation({
+         
+          query: ({ id, data }) => ({
+           
+            url: `/students/${id}`,
+            method: "PATCH",
+            body: data
+          }),
+        }),
+        addAdmin: builder.mutation({
+          query: (formData)=>({
+              url: "/users/create-admin",
+              method: "POST",
+              body:formData,
+          }),
+         }),
+        
       }) ,
 })
 
-export const {useAddStudentMutation ,useGetAllStudentQuery,useGetSingleStudentQuery} = userManagementApi;
+export const {useAddStudentMutation ,useGetAllStudentQuery,useGetSingleStudentQuery,useUpdateStudentMutation,useAddAdminMutation} = userManagementApi;
