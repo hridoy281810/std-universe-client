@@ -5,13 +5,14 @@ type TSelectProps = {
    name: string,
    label: string,
    options: {value: string; label: string; disabled?:boolean}[] | undefined
-   disabled?:boolean
+   disabled?:boolean,
+   mode?: 'multiple' | undefined
 }
-const StdUniSelect = ({label,name,options,disabled}:TSelectProps) => {
+const StdUniSelect = ({label,name,options,disabled,mode}:TSelectProps) => {
 
   return (
     <Controller name={name} render={({field,fieldState: {error}})=> <Form.Item   label={label}>
-    <Select {...field}
+    <Select mode={mode} {...field} 
     disabled={disabled}
       style={{ width: "100%" }}
       options={options} size='large'

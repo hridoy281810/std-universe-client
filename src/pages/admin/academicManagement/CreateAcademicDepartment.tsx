@@ -1,5 +1,5 @@
 import {  FieldValues, SubmitHandler } from "react-hook-form";
-import { useAddAcademicDepartmentMutation, useGetAllFacultyQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useAddAcademicDepartmentMutation, useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagement.api";
 import { Button, Col, Flex } from "antd";
 import StdUniForm from "../../../components/form/StdUniForm";
 import StdUniSelect from "../../../components/form/StdUniSelect";
@@ -9,7 +9,7 @@ import { TAcademicDepartment, TResponse } from "../../../typs";
 import { toast } from "sonner";
 
 const CreateAcademicDepartment = () => {
-const {data:fData}= useGetAllFacultyQuery(undefined)
+const {data:fData}= useGetAllAcademicFacultyQuery(undefined)
     const departmentOptions = fData?.data?.map(faculty =>({
       value: `Department of ${ faculty.name.replace('Faculty of ', '')}`,
       label: `Department of ${ faculty.name.replace('Faculty of ', '')}`

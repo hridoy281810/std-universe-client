@@ -18,6 +18,8 @@ import FacultyData from "../pages/admin/userManagement/faculty/FacultyData";
 import FacultyDetails from "../pages/admin/userManagement/faculty/FacultyDetails";
 import UpdateFacultyData from "../pages/admin/userManagement/faculty/UpdateFacultyData";
 import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemesters";
+import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
 
 export const adminPaths =  [
   {
@@ -46,7 +48,7 @@ export const adminPaths =  [
       {
         name:'Academic Faculty',
         path: "academic-faculty", 
-        element: <AcademicFaculty/>,
+        element: <AcademicFaculty />,
       },
       {
         name:'Create A. Department',
@@ -135,6 +137,16 @@ export const adminPaths =  [
         name:'Semester Registration',
         path: "semester-registration", 
         element: <SemesterRegistration />,
+      },
+      {
+        name:'Registered Semesters',
+        path: "registered-semesters", 
+        element: <RegisteredSemesters />,
+      },
+      {
+        name:'Create Course',
+        path: "create-course", 
+        element: <CreateCourse />,
       },
 
       
