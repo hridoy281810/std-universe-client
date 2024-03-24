@@ -1,12 +1,12 @@
 import { Button, Table, TableColumnsType } from "antd";
-import { useGetAllFacultyQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagement.api";
 type TTableData ={
   index: number,
   name:string
 }
 const AcademicFaculty = () => {
-  const {data: facultyData,isFetching,isLoading} = useGetAllFacultyQuery(undefined,{refetchOnMountOrArgChange:true})
-  console.log(isFetching,isLoading);
+  const {data: facultyData,isFetching,isLoading} = useGetAllAcademicFacultyQuery(undefined)
+  console.log(facultyData,isFetching,isLoading);
   
   const tableData = facultyData?.data?.map(({_id,name},index )=> ({
     key: _id,name,index: index +1 
