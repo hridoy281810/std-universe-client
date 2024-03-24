@@ -1,6 +1,6 @@
 import AdminDashboard from "../pages/admin/userManagement/AdminDashboard";
 import CreateAdmin from "../pages/admin/userManagement/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
+import CreateFaculty from "../pages/admin/userManagement/faculty/CreateFaculty";
 import CreateStudent from "../pages/admin/userManagement/student/CreateStudent";
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment";
 import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty";
@@ -11,6 +11,12 @@ import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcad
 import StudentData from "../pages/admin/userManagement/student/StudentData";
 import StudentDetails from "../pages/admin/userManagement/student/StudentDetails";
 import UpdateStudentData from "../pages/admin/userManagement/student/UpdateStudentData";
+import AdminData from "../pages/admin/userManagement/admin/AdminData";
+import AdminDetails from "../pages/admin/userManagement/admin/AdminDetails";
+import UpdateAdminData from "../pages/admin/userManagement/admin/UpdateAdminData";
+import FacultyData from "../pages/admin/userManagement/faculty/FacultyData";
+import FacultyDetails from "../pages/admin/userManagement/faculty/FacultyDetails";
+import UpdateFacultyData from "../pages/admin/userManagement/faculty/UpdateFacultyData";
 
 export const adminPaths =  [
   {
@@ -81,9 +87,35 @@ export const adminPaths =  [
         element: <CreateAdmin />,
       },
       {
+        name:'Admin',
+        path: "admin-data", 
+        element: <AdminData />,
+      },
+      {
+        path: "admin-data/:adminId", 
+        element: <AdminDetails />,
+      },
+      {
+        path: "update-admin-data/:studentId", 
+        element: <UpdateAdminData />,
+      },
+      {
         name:"Create Faculty",
         path: "create-faculty", 
         element: <CreateFaculty />,
+      },
+      {
+        name:"Faculty",
+        path: "faculty-data", 
+        element: <FacultyData />,
+      },
+      {
+        path: "faculty-data/:facultyId", 
+        element: <FacultyDetails />,
+      },
+      {
+        path: "update-faculty-data/:facultyId", 
+        element: <UpdateFacultyData />,
       },
       
       

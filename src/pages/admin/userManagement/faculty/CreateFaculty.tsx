@@ -5,55 +5,58 @@ import StdUniForm from "../../../../components/form/StdUniForm";
 import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
 import { bloodGroupsOptions, gendersOption } from "../../../../components/constants/global";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import { useAddAdminMutation } from "../../../../redux/features/admin/userManagement.api";
+import {  useAddFacultyMutation } from "../../../../redux/features/admin/userManagement.api";
+import { useGetAllDepartmentQuery } from "../../../../redux/features/admin/academicManagement.api";
 
 
 
 // "password": "admin123",
-const admin = {
-   "password":"134",
-      "admin": {
-        "designation": "Admin",
+const faculty= {
+  "password": "faculty123",
+  "faculty": {
+      "designation":"Lecturer",
       "name": {
-          "firstName": "Mr. Mezbaul",
-          "middleName": "Abedin",
-          "lastName": "Forhan"
+          "firstName": "Mridul ",
+          "middleName": "Das",
+          "lastName": "Rahman"
       },
-      "gender": "male",
-      "dateOfBirth": "1998-04-24",
-      "bloogGroup": "O+",
-      
-      "email": "mezbaul2@programming-hero.com",
-      "contactNo": "12356789",
-      "emergencyContactNo": "12356789",
+      "gender":"male",
+      "email":"faculty3@gmail.com",
+      "dateOfBirth": "1990-01-01",
+      "contactNo": "123",
+      "emergencyContactNo": "123",
+      "bloogGroup": "A+",
       "presentAddress": "123 Main St, Cityville",
-      "permanentAddress": "456 Oak St, Townsville"
-      }
+      "permanentAddress": "456 Oak St, Townsville",
+      "academicDepartment":"65b00fb010b74fcbd7a25d8e"
   }
+}
 
-
-const CreateAdmin = () => {
-  const [addAdmin,{data,error}] = useAddAdminMutation()
+const CreateFaculty = () => {
+  const [addFaculty,{data,error}] = useAddFacultyMutation()
   console.log(data,error);
-  
+  const {data: dData, isLoading:dIsLoading} = useGetAllDepartmentQuery(undefined)
+const departmentOptions =dData?.data?.map((item)=>({
+  value: item._id,
+  label: item.name
+}))
   const onSubmit:SubmitHandler<FieldValues> =(data)=>{
   console.log(data);
-  const adminData = {
-    password:"admin123",
+  const facultyData = {
+    password:"faculty123",
     admin :{
-      designation: "Admin",
+      designation: "Lecturer",
     ...data
     }
   }
-  console.log(adminData);
+  console.log(facultyData);
   
   const formData = new FormData()
   
-  formData.append("data", JSON.stringify(adminData))
+  formData.append("data", JSON.stringify(facultyData))
    formData.append('file', data.profileImg)
-  addAdmin(formData)
+   addFaculty(formData)
 
-  
    }
     
   return (
@@ -110,6 +113,9 @@ const CreateAdmin = () => {
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <StdUniInput type="text" name="permanentAddress "  label="permanent Address"/>
         </Col>
+        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+        <StdUniSelect disabled={dIsLoading} options={departmentOptions} name="academicDepartment" label="Academic Department" />
+        </Col>
       </Row>
         <Button htmlType="submit">Submit</Button>
       </StdUniForm>
@@ -117,5 +123,4 @@ const CreateAdmin = () => {
     </Row>
   );
 };
-
-export default CreateAdmin;
+export default CreateFaculty;

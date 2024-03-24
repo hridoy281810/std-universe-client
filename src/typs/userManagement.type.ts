@@ -46,7 +46,10 @@ import { TAcademicDepartment, TAcademicSemester } from "."
   }
   
 
-  export type Admin =  {
+  export type TAdmin =  {
+    _id: string
+    id:string
+    user:string
     password: string
     designation: string
     name: TName
@@ -57,6 +60,11 @@ import { TAcademicDepartment, TAcademicSemester } from "."
     contactNo: string
     emergencyContactNo: string
     presentAddress: string
-    permanentAddress: string
+    permanentAddress: string,
+    fullName:string,
+    isDeleted:boolean
+    isLoading:boolean
+    data:TAdmin
+    map:any
+__v:number
   }
-  
