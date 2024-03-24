@@ -18,7 +18,9 @@ import { TAcademicDepartment, TAcademicSemester } from "."
     admissionSemester: TAcademicSemester
     academicDepartment: TAcademicDepartment
     isDeleted: boolean
-    fullName:string
+    fullName:string,
+    isLoading: boolean,
+    data: TStudent
   }
   
   export type TName= {
@@ -43,3 +45,26 @@ import { TAcademicDepartment, TAcademicSemester } from "."
     address: string
   }
   
+
+  export type TAdmin =  {
+    _id: string
+    id:string
+    user:string
+    password: string
+    designation: string
+    name: TName
+    gender: string
+    dateOfBirth: string
+    bloogGroup: string
+    email: string
+    contactNo: string
+    emergencyContactNo: string
+    presentAddress: string
+    permanentAddress: string,
+    fullName:string,
+    isDeleted:boolean
+    isLoading:boolean
+    data:TAdmin
+    map:any
+__v:number
+  }

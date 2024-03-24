@@ -1,12 +1,12 @@
-import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import StdUniForm from "../../../components/form/StdUniForm";
-import StdUniInput from "../../../components/form/StdUniInput";
+import {FieldValues, SubmitHandler } from "react-hook-form";
+import StdUniForm from "../../../../components/form/StdUniForm";
+import StdUniInput from "../../../../components/form/StdUniInput";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import StdUniSelect from "../../../components/form/StdUniSelect";
-import { bloodGroupsOptions, gendersOption } from "../../../components/constants/global";
-import StdUniDatePicker from "../../../components/form/StdUniDatePicker";
-import { useGetAllDepartmentQuery, useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagement.api";
-import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import StdUniSelect from "../../../../components/form/StdUniSelect";
+import { bloodGroupsOptions, gendersOption } from "../../../../components/constants/global";
+import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
+import { useGetAllDepartmentQuery, useGetAllSemesterQuery } from "../../../../redux/features/admin/academicManagement.api";
+import { useAddStudentMutation } from "../../../../redux/features/admin/userManagement.api";
 
 
 const studentDummyData = {
@@ -101,7 +101,7 @@ const departmentOptions =dData?.data?.map((item)=>({
   }
   return (
     
-    <Row>
+    <Row style={{display: "flex", justifyContent: 'center'}}>
       <Col>
       <StdUniForm onSubmit={onSubmit} defaultValues={studentDefaultValues}>
         <Divider>Personal Info</Divider>
