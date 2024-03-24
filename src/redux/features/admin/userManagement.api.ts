@@ -1,5 +1,5 @@
 import { SubmitErrorHandler } from "react-hook-form";
-import { TAdmin, TQueryParam, TResponseRedux, TStudent  } from "../../../typs";
+import { TAdmin, TFaculty, TQueryParam, TResponseRedux, TStudent  } from "../../../typs";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -129,7 +129,7 @@ const userManagementApi = baseApi.injectEndpoints({
               params:params
             }
           },
-          transformResponse: (response: TResponseRedux<TAdmin[]>) =>  {
+          transformResponse: (response: TResponseRedux<TFaculty[]>) =>  {
                return {
                 data: response.data,
                 meta: response.meta
@@ -144,7 +144,7 @@ const userManagementApi = baseApi.injectEndpoints({
               id:_id
             }
           },
-          transformResponse: (response: TResponseRedux<TAdmin []>) =>  {
+          transformResponse: (response: TResponseRedux<TFaculty []>) =>  {
                return {
                 data: response.data,
                 meta: response.meta
