@@ -17,6 +17,7 @@ import UpdateAdminData from "../pages/admin/userManagement/admin/UpdateAdminData
 import FacultyData from "../pages/admin/userManagement/faculty/FacultyData";
 import FacultyDetails from "../pages/admin/userManagement/faculty/FacultyDetails";
 import UpdateFacultyData from "../pages/admin/userManagement/faculty/UpdateFacultyData";
+import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
 
 export const adminPaths =  [
   {
@@ -130,6 +131,12 @@ export const adminPaths =  [
         path: "offer-course", 
         element: <CreateAdmin />,
       },
+      {
+        name:'Semester Registration',
+        path: "semester-registration", 
+        element: <SemesterRegistration />,
+      },
+
       
      ]
 

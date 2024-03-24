@@ -9,6 +9,7 @@ export type TAcademicSemester = {
     updatedAt: string
     createdAt: string
     __v: number
+    data:TAcademicDepartment
   }
   export type TAcademicFaculty ={ 
     _id: string,
