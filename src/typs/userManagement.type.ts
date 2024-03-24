@@ -68,3 +68,26 @@ import { TAcademicDepartment, TAcademicSemester } from "."
     map:any
 __v:number
   }
+
+  export type TFaculty = {
+    password: string
+    _id: string
+    id:string
+    designation: string
+    name: TName
+    gender: string
+    email: string
+    dateOfBirth: string
+    contactNo: string
+    emergencyContactNo: string
+    bloogGroup: string
+    presentAddress: string
+    permanentAddress: string
+    academicDepartment: TAcademicDepartment
+    fullName:string,
+    isDeleted:boolean
+    isLoading:boolean
+    data:TFaculty
+    map:any
+__v:number
+  }
