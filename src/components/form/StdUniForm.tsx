@@ -22,7 +22,7 @@ const StdUniForm = ({onSubmit,children,defaultValues,resolver}: TFromProps) => {
 const methods = useForm(formConfig)
 const submit:SubmitHandler<FieldValues> = (data)=>{
     onSubmit(data)
-    methods.reset()
+    // methods.reset()
 }  
 return (
     <FormProvider {...methods}>

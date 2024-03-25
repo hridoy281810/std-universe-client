@@ -5,12 +5,13 @@ type TInputProps = {
     name: string,
     label?:string,
     defaultValues?: string
+    disabled?:boolean
 }
-const StdUniInput = ({type,name,label,defaultValues}: TInputProps) => {
+const StdUniInput = ({type,name,label,defaultValues,disabled}: TInputProps) => {
   return (
     <div style={{marginBottom: "20px"}}>
    <Controller name={name} render={({field})=> <Form.Item label={label}>
-   <Input {...field} type={type} id={name}  defaultValue={defaultValues}  style={{ width: "100%" }}
+   <Input disabled={disabled} {...field} type={type} id={name}  defaultValue={defaultValues}  style={{ width: "100%" }}
      size='large'/>
    </Form.Item> } />
     </div>

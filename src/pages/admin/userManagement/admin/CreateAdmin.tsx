@@ -4,7 +4,7 @@ import StdUniSelect from "../../../../components/form/StdUniSelect";
 import StdUniForm from "../../../../components/form/StdUniForm";
 import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
 import { bloodGroupsOptions, gendersOption } from "../../../../components/constants/global";
-import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
+import {FieldValues, SubmitHandler } from "react-hook-form";
 import { useAddAdminMutation } from "../../../../redux/features/admin/userManagement.api";
 
 
@@ -50,7 +50,7 @@ const CreateAdmin = () => {
   const formData = new FormData()
   
   formData.append("data", JSON.stringify(adminData))
-   formData.append('file', data.profileImg)
+  //  formData.append('file', data.profileImg)
   addAdmin(formData)
 
   
@@ -80,7 +80,7 @@ const CreateAdmin = () => {
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <StdUniSelect options={bloodGroupsOptions} name="bloogGroup" label="Blood Group" />
         </Col>
-        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+        {/* <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <Controller name="profileImg" render={({field: {onChange,value, ...field}})=> (
           <Form.Item label="Picture">
             <Input type="file"
@@ -91,7 +91,7 @@ const CreateAdmin = () => {
           </Form.Item>
 
         )}/>
-        </Col>
+        </Col> */}
       </Row>
         <Divider>Contact Info</Divider>
       <Row gutter={8}>
@@ -105,10 +105,10 @@ const CreateAdmin = () => {
         <StdUniInput type="text" name="emergencyContactNo" label="Emergency Contact Number" />
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
-        <StdUniInput type="text" name="presentAddress "  label="Present Address"/>
+        <StdUniInput type="text" name="presentAddress"  label="Present Address"/>
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
-        <StdUniInput type="text" name="permanentAddress "  label="permanent Address"/>
+        <StdUniInput type="text" name="permanentAddress"  label="permanent Address"/>
         </Col>
       </Row>
         <Button htmlType="submit">Submit</Button>
