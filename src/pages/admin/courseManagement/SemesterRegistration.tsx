@@ -25,7 +25,7 @@ const SemesterRegistration = () => {
         name:'sort',value:'year'
     }])
     console.log(academicSemester);
-    const academicSemesterOptions= academicSemester?.data?.map((item)=> ({
+  const academicSemesterOptions= academicSemester?.data?.map((item)=> ({
         value:item._id,
         label: `${item.name} ${item.year}`
     }))

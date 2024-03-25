@@ -1,4 +1,4 @@
-import {  TQueryParam, TResponseRedux, TSemester } from "../../../typs";
+import {  TOfferedCourses, TQueryParam, TResponseRedux, TSemester } from "../../../typs";
 import { baseApi } from "../../api/baseApi";
 
 const courseManagementApi = baseApi.injectEndpoints({
@@ -71,9 +71,61 @@ const courseManagementApi = baseApi.injectEndpoints({
           }),
           invalidatesTags:['course']
          }),
+         addCourseFaculties: builder.mutation({
+          query: (args)=>({
+              url: `/courses/${args.courseId}/assign-faculties`,
+              method: "PUT",
+              body: args.data,
+          }),
+          invalidatesTags:['course']
+         }),
 
+         getAllFaculties: builder.query({
+          query: (id)=>{
+             return { url: `/courses/${id}/get-faculties`,
+              method: "GET",
+            }
+          },
+          providesTags: ['course'],
+          transformResponse: (response: TResponseRedux<any[]>) =>  {
+               return {
+                data: response.data,
+                meta: response.meta
+               }
+          }, 
+         }),
+         getAllOfferedCourses: builder.query({
+          query: (args)=>{
+          const params = new URLSearchParams();
+          if(args){
+            args.forEach((item:TQueryParam) => {
+                params.append(item.name,item.value as string)
+            });
+          }
+         
+             return { url: "/offered-courses",
+              method: "GET",
+              params: params
+            }
+          },
+          providesTags: ['offer-course'],
+          transformResponse: (response: TResponseRedux<TOfferedCourses[]>) =>  {
+               return {
+                data: response.data,
+                meta: response.meta
+               }
+          },
+         }),
+         addOfferCourse: builder.mutation({
+          query: (data)=>({
+              url: "/offered-courses/create-offered-course",
+              method: "POST",
+              body: data,
+          }),
+          invalidatesTags:['offer-course']
+         }),
 
       }) ,
 })
 
-export const {useAddRegisterSemesterMutation, useGetAllRegisterSemesterQuery,useUpdateRegisteredSemesterMutation,useGetAllCoursesQuery,useAddCourseMutation} = courseManagementApi
+export const {useAddRegisterSemesterMutation, useGetAllRegisterSemesterQuery,useUpdateRegisteredSemesterMutation,useGetAllCoursesQuery,useAddCourseMutation,useAddCourseFacultiesMutation,useGetAllFacultiesQuery,useAddOfferCourseMutation,useGetAllOfferedCoursesQuery} = courseManagementApi

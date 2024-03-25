@@ -1,7 +1,7 @@
 
 import { Button, Dropdown, Table, Tag } from 'antd';
-import type { MenuProps, TableColumnsType, TableProps } from 'antd';
-import { TQueryParam, TResponse, TSemester } from "../../../typs";
+import type { TableColumnsType } from 'antd';
+import {  TResponse, TSemester } from "../../../typs";
 import { useGetAllRegisterSemesterQuery, useUpdateRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagement";
 import moment from "moment";
 import { useState } from 'react';

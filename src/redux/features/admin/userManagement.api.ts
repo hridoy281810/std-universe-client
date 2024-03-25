@@ -57,10 +57,10 @@ const userManagementApi = baseApi.injectEndpoints({
           }),
         }),
         addAdmin: builder.mutation({
-          query: (formData)=>({
+          query: (data)=>({
               url: "/users/create-admin",
               method: "POST",
-              body:formData,
+              body:data,
           }),
          }),
          getAllAdmin: builder.query({
@@ -109,10 +109,10 @@ const userManagementApi = baseApi.injectEndpoints({
           }),
         }),
         addFaculty: builder.mutation({
-          query: (formData)=>({
+          query: (data)=>({
               url: "/users/create-faculty",
               method: "POST",
-              body:formData,
+              body:data,
           }),
          }),
          getAllFaculty: builder.query({

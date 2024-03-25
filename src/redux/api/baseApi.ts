@@ -68,6 +68,6 @@ import { toast } from 'sonner';
   export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ['semester','academic-semester','academic-faculty','course'],
+    tagTypes: ['semester','academic-semester','academic-faculty','course','offer-course'],
     endpoints: () => ({}),
   });

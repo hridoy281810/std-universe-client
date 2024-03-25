@@ -4,9 +4,11 @@ import StdUniSelect from "../../../../components/form/StdUniSelect";
 import StdUniForm from "../../../../components/form/StdUniForm";
 import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
 import { bloodGroupsOptions, gendersOption } from "../../../../components/constants/global";
-import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
+import {  FieldValues, SubmitHandler } from "react-hook-form";
 import {  useAddFacultyMutation } from "../../../../redux/features/admin/userManagement.api";
 import { useGetAllDepartmentQuery } from "../../../../redux/features/admin/academicManagement.api";
+import { toast } from "sonner";
+import { TResponse } from "../../../../typs";
 
 
 
@@ -40,13 +42,15 @@ const departmentOptions =dData?.data?.map((item)=>({
   value: item._id,
   label: item.name
 }))
-  const onSubmit:SubmitHandler<FieldValues> =(data)=>{
+  const onSubmit:SubmitHandler<FieldValues> =async(data)=>{
   console.log(data);
+  const toastId = toast.loading("Creating...")
   const facultyData = {
     password:"faculty123",
-    admin :{
+  
+    faculty :{
       designation: "Lecturer",
-    ...data
+      ...data
     }
   }
   console.log(facultyData);
@@ -54,8 +58,21 @@ const departmentOptions =dData?.data?.map((item)=>({
   const formData = new FormData()
   
   formData.append("data", JSON.stringify(facultyData))
-   formData.append('file', data.profileImg)
-   addFaculty(formData)
+  //  formData.append('file', data.profileImg)
+  
+   try{
+    const res =  (await addFaculty(formData) )as TResponse<any>
+    console.log(res,'faculty');
+    if(res.error){
+      toast.error(`server error ${res.error.data.message}`,{id:toastId})
+    }else{
+      toast.success("Semester Created!",{id:toastId})
+    }
+    
+  }catch(err){
+toast.error("something went wrong",{id:toastId})
+
+  }
 
    }
     
@@ -83,7 +100,7 @@ const departmentOptions =dData?.data?.map((item)=>({
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <StdUniSelect options={bloodGroupsOptions} name="bloogGroup" label="Blood Group" />
         </Col>
-        <Col span={24} md={{span: 12}} lg={{span: 8}}>
+        {/* <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <Controller name="profileImg" render={({field: {onChange,value, ...field}})=> (
           <Form.Item label="Picture">
             <Input type="file"
@@ -94,7 +111,7 @@ const departmentOptions =dData?.data?.map((item)=>({
           </Form.Item>
 
         )}/>
-        </Col>
+        </Col> */}
       </Row>
         <Divider>Contact Info</Divider>
       <Row gutter={8}>
@@ -108,10 +125,10 @@ const departmentOptions =dData?.data?.map((item)=>({
         <StdUniInput type="text" name="emergencyContactNo" label="Emergency Contact Number" />
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
-        <StdUniInput type="text" name="presentAddress "  label="Present Address"/>
+        <StdUniInput type="text" name="presentAddress"  label="Present Address"/>
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
-        <StdUniInput type="text" name="permanentAddress "  label="permanent Address"/>
+        <StdUniInput type="text" name="permanentAddress"  label="permanent Address"/>
         </Col>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>
         <StdUniSelect disabled={dIsLoading} options={departmentOptions} name="academicDepartment" label="Academic Department" />

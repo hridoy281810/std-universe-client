@@ -29,6 +29,10 @@ const course = {
   ]
  
 }
+type TItem = {
+  course:string,
+  isDeleted: boolean
+}
 const CreateCourse = () => {
   const [addCourse, {data,error}] = useAddCourseMutation()
   console.log("Register data=> ",data,error);
@@ -46,7 +50,7 @@ const CreateCourse = () => {
      ...data,
      code:Number(data.code),
      credits:Number(data.credits),
-     preRequisiteCourses:data.preRequisiteCourses?  data?.preRequisiteCourses?.map((item)=>({
+     preRequisiteCourses: data.preRequisiteCourses?  data?.preRequisiteCourses?.map((item:TItem)=>({
       course:item,
       isDeleted:false
 
