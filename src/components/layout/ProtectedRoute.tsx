@@ -23,5 +23,5 @@ const ProtectedRoute = ({children,role}:TProtectedRoute) => {
     }
   return children;
 };
-
+222222
 export default ProtectedRoute;
