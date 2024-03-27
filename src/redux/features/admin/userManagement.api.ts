@@ -1,4 +1,4 @@
-import { SubmitErrorHandler } from "react-hook-form";
+
 import { TAdmin, TFaculty, TQueryParam, TResponseRedux, TStudent  } from "../../../typs";
 import { baseApi } from "../../api/baseApi";
 
@@ -18,6 +18,7 @@ const userManagementApi = baseApi.injectEndpoints({
               params:params
             }
           },
+          providesTags: ['students'],
           transformResponse: (response: TResponseRedux<TStudent[]>) =>  {
                return {
                 data: response.data,
@@ -33,6 +34,7 @@ const userManagementApi = baseApi.injectEndpoints({
               id:_id
             }
           },
+          providesTags: ['students'],
           transformResponse: (response: TResponseRedux<TStudent[]>) =>  {
                return {
                 data: response.data,
@@ -46,6 +48,7 @@ const userManagementApi = baseApi.injectEndpoints({
               method: "POST",
               body:data,
           }),
+          invalidatesTags:['students'],
          }),
          updateStudent: builder.mutation({
          
@@ -55,6 +58,7 @@ const userManagementApi = baseApi.injectEndpoints({
             method: "PATCH",
             body: data
           }),
+          invalidatesTags:['students'],
         }),
         addAdmin: builder.mutation({
           query: (data)=>({
@@ -62,6 +66,7 @@ const userManagementApi = baseApi.injectEndpoints({
               method: "POST",
               body:data,
           }),
+          invalidatesTags:['admis'],
          }),
          getAllAdmin: builder.query({
           query: (args)=>{
@@ -77,6 +82,7 @@ const userManagementApi = baseApi.injectEndpoints({
               params:params
             }
           },
+          providesTags: ['admis'],
           transformResponse: (response: TResponseRedux<TAdmin[]>) =>  {
                return {
                 data: response.data,
@@ -92,6 +98,7 @@ const userManagementApi = baseApi.injectEndpoints({
               id:_id
             }
           },
+          providesTags: ['admis'],
           transformResponse: (response: TResponseRedux<TAdmin []>) =>  {
                return {
                 data: response.data,
@@ -107,6 +114,7 @@ const userManagementApi = baseApi.injectEndpoints({
             method: "PATCH",
             body: data
           }),
+          invalidatesTags:['admis'],
         }),
         addFaculty: builder.mutation({
           query: (data)=>({
@@ -114,6 +122,7 @@ const userManagementApi = baseApi.injectEndpoints({
               method: "POST",
               body:data,
           }),
+          invalidatesTags:['faculty'],
          }),
          getAllFaculty: builder.query({
           query: (args)=>{
@@ -129,6 +138,7 @@ const userManagementApi = baseApi.injectEndpoints({
               params:params
             }
           },
+          providesTags:['faculty'],
           transformResponse: (response: TResponseRedux<TFaculty[]>) =>  {
                return {
                 data: response.data,
@@ -136,6 +146,7 @@ const userManagementApi = baseApi.injectEndpoints({
                }
           },
          }),
+   
          getSingleFaculty: builder.query({
           query: (_id)=>{
            
@@ -144,6 +155,7 @@ const userManagementApi = baseApi.injectEndpoints({
               id:_id
             }
           },
+          providesTags:['faculty'],
           transformResponse: (response: TResponseRedux<TFaculty []>) =>  {
                return {
                 data: response.data,
@@ -159,6 +171,7 @@ const userManagementApi = baseApi.injectEndpoints({
             method: "PATCH",
             body: data
           }),
+         invalidatesTags: ['faculty'],
         }),
       }) ,
 })

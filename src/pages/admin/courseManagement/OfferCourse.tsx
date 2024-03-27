@@ -1,7 +1,7 @@
-import { Button, Col, Flex, Row } from "antd";
+import { Button, Col, Flex } from "antd";
 import StdUniForm from "../../../components/form/StdUniForm";
 import StdUniSelect from "../../../components/form/StdUniSelect";
-import { useGetAllAcademicFacultyQuery, useGetAllDepartmentQuery, useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagement.api";
+import { useGetAllAcademicFacultyQuery, useGetAllDepartmentQuery } from "../../../redux/features/admin/academicManagement.api";
 import StdUniInput from "../../../components/form/StdUniInput";
 import StdUniSelectWithWatch from "../../../components/form/StdUniSelectWithWatch";
 import { useAddOfferCourseMutation, useGetAllCoursesQuery, useGetAllFacultiesQuery, useGetAllRegisterSemesterQuery } from "../../../redux/features/admin/courseManagement";
@@ -9,25 +9,22 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { daysOptions } from "../../../components/constants/course";
 
-
+type TFacultyDataOptions = {
+  _id:string
+  fullName:string
+}
 const OfferCourse = () => {
   const [id,setId] = useState('')
-  // console.log(id,'id');
-  const [addOfferCourse,{data,error}] = useAddOfferCourseMutation()
-console.log(data,error);
-
+  const [addOfferCourse] = useAddOfferCourseMutation()
   const {data:academicFaculty} = useGetAllAcademicFacultyQuery(undefined)
   // console.log(academicFaculty?.data,'anis');
 
   const {data:academicDepartment} = useGetAllDepartmentQuery(undefined)
   const {data:semesterData} = useGetAllRegisterSemesterQuery(undefined)
   const {data:courseData} = useGetAllCoursesQuery(undefined)
-  const {data:facultiesData} = useGetAllFacultiesQuery(id)
-console.log(facultiesData?.data);
-
-  
-
-const facultyDataOptions= facultiesData? facultiesData.data?.faculties?.map((item)=> ({
+  const {data:facultiesData,isFetching:fetchingFaculty} = useGetAllFacultiesQuery(id,{skip:!id})
+console.log(facultiesData?.data,'etai dorkar');
+const facultyDataOptions= facultiesData? facultiesData.data?.faculties?.map((item: TFacultyDataOptions)=> ({
     value:item._id,
     label: item.fullName
 })) : [];
@@ -63,19 +60,15 @@ console.log(academicFacultyOptions);
     addOfferCourse(offerCourse)
     
   }
-
   return (
-<Flex justify="center" align="center">
-
-       
+<Flex justify="center" align="center">    
 <Col span={9}>
    <StdUniForm onSubmit={onSubmit}>
     <StdUniSelect options={semesterDataOptions} label='Semester Registration' name="semesterRegistration"/>
-
     <StdUniSelect options={academicFacultyOptions} label='Academic Faculty' name="academicFaculty"/>
     <StdUniSelect options={academicDepartmentOptions} label='Academic Department' name="academicDepartment" />
     <StdUniSelectWithWatch onValueChange={setId} options={courseDataOptions} label='Course' name="course" />
-    <StdUniSelect  disabled={!id} options={facultyDataOptions} label='Faculty' name="faculty" />
+    <StdUniSelect  disabled={!id || fetchingFaculty} options={facultyDataOptions} label='Faculty' name="faculty" />
     <StdUniInput   name="section" type="number" label="Section" />
     <StdUniInput   name="maxCapacity" type="number" label="Max Capacity" />
     <StdUniSelect mode="multiple" options={daysOptions} label='Days' name="days"/>
