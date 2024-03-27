@@ -15,8 +15,8 @@ const Login = () => {
   // const {register} = useForm()
     const [login] = useLoginMutation()
     const defaultValues = {
-      id: "2025010001",
-      password: "student123"
+      id: "2026030001",
+      password: "123456"
     }
   const onSubmit = async(data: FieldValues) => {
     console.log(data);
@@ -27,11 +27,17 @@ const Login = () => {
       password: data.password
      }
      const res =  await login(userInfo).unwrap()
+     console.log(res);
+     
      const user = verifyToken(res.data.accessToken) as TUser;
      console.log(user);
      dispatch(setUser({user: user, token: res.data.accessToken}))
      toast.success('logged in',{id:toastId,duration:2000})
-     navigate(`/${user.role}/dashboard`)
+      if(res?.data?.needsPasswordChange){
+        navigate(`/change-password`)
+      }else{
+        navigate(`/${user.role}/dashboard`)
+      }
   }catch(error){
 toast.error('something went wrong',{id:toastId,duration:2000})
   }

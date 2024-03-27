@@ -173,7 +173,17 @@ const userManagementApi = baseApi.injectEndpoints({
           }),
          invalidatesTags: ['faculty'],
         }),
+        changePassword: builder.mutation({
+          query: (data)=>({
+              url: "/auth/change-password",
+              method: "POST",
+              body:data,
+          }),
+         }),
+
+
+
       }) ,
 })
 
-export const {useAddStudentMutation ,useGetAllStudentQuery,useGetSingleStudentQuery,useUpdateStudentMutation,useAddAdminMutation,useGetAllAdminQuery,useGetSingleAdminQuery,useUpdateAdminMutation,useGetAllFacultyQuery,useGetSingleFacultyQuery,useUpdateFacultyMutation,useAddFacultyMutation} = userManagementApi;
+export const {useAddStudentMutation ,useGetAllStudentQuery,useGetSingleStudentQuery,useUpdateStudentMutation,useAddAdminMutation,useGetAllAdminQuery,useGetSingleAdminQuery,useUpdateAdminMutation,useGetAllFacultyQuery,useGetSingleFacultyQuery,useUpdateFacultyMutation,useAddFacultyMutation,useChangePasswordMutation} = userManagementApi;
