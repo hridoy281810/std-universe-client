@@ -10,7 +10,7 @@ import {
   import { logout, setUser } from '../features/auth/authSlice';
 import { toast } from 'sonner';
 //   import { toast } from 'sonner';
-  
+
   const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/v1',
     credentials: 'include',
@@ -33,7 +33,7 @@ import { toast } from 'sonner';
     let result = await baseQuery(args, api, extraOptions);
   
     if (result?.error?.status === 404) {
-      toast.error(result.error.data.message);
+      toast.error("404 ") 
     }
     if (result?.error?.status === 401) {
       //* Send Refresh
@@ -68,6 +68,6 @@ import { toast } from 'sonner';
   export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithRefreshToken,
-    tagTypes: ['semester','academic-semester','academic-faculty','course','offer-course'],
+    tagTypes: ['semester','academic-semester','academic-faculty','course','offer-course','faculty','admis','students'],
     endpoints: () => ({}),
   });

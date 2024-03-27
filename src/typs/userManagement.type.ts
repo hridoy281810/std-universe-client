@@ -73,6 +73,7 @@ __v:number
     password: string
     _id: string
     id:string
+    user:string
     designation: string
     name: TName
     gender: string

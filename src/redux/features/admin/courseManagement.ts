@@ -1,4 +1,4 @@
-import {  TOfferedCourses, TQueryParam, TResponseRedux, TSemester } from "../../../typs";
+import {  TAllCourses, TOfferedCourses, TQueryParam, TResponseRedux, TSemester, TSingleFaculties } from "../../../typs";
 import { baseApi } from "../../api/baseApi";
 
 const courseManagementApi = baseApi.injectEndpoints({
@@ -56,7 +56,7 @@ const courseManagementApi = baseApi.injectEndpoints({
             }
           },
           providesTags: ['course'],
-          transformResponse: (response: TResponseRedux<any[]>) =>  {
+          transformResponse: (response: TResponseRedux<TAllCourses[]>) =>  {
                return {
                 data: response.data,
                 meta: response.meta
@@ -87,7 +87,7 @@ const courseManagementApi = baseApi.injectEndpoints({
             }
           },
           providesTags: ['course'],
-          transformResponse: (response: TResponseRedux<any[]>) =>  {
+          transformResponse: (response: TResponseRedux<TSingleFaculties>) =>  {
                return {
                 data: response.data,
                 meta: response.meta
@@ -124,8 +124,15 @@ const courseManagementApi = baseApi.injectEndpoints({
           }),
           invalidatesTags:['offer-course']
          }),
-
+         updateOfferCourse: builder.mutation({
+          query: (args)=>({
+              url: `/offered-courses/${args.id}`,
+              method: "PATCH",
+              body: args.data,
+          }),
+          invalidatesTags:['offer-course']
+         }),
       }) ,
 })
 
-export const {useAddRegisterSemesterMutation, useGetAllRegisterSemesterQuery,useUpdateRegisteredSemesterMutation,useGetAllCoursesQuery,useAddCourseMutation,useAddCourseFacultiesMutation,useGetAllFacultiesQuery,useAddOfferCourseMutation,useGetAllOfferedCoursesQuery} = courseManagementApi
+export const {useAddRegisterSemesterMutation, useGetAllRegisterSemesterQuery,useUpdateRegisteredSemesterMutation,useGetAllCoursesQuery,useAddCourseMutation,useAddCourseFacultiesMutation,useGetAllFacultiesQuery,useAddOfferCourseMutation,useGetAllOfferedCoursesQuery,useUpdateOfferCourseMutation} = courseManagementApi

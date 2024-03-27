@@ -6,7 +6,14 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import StdUniSelect from "../../../components/form/StdUniSelect";
 import { useGetAllFacultyQuery } from "../../../redux/features/admin/userManagement.api";
 
-
+type TFacultyInfo = {
+  code:string
+key:string
+title:string
+}
+type TFacultyInfo2 ={
+  facultyInfo:TFacultyInfo
+}
 const Courses = () => {
   const {data:courseData, isLoading,isFetching } = useGetAllCoursesQuery(undefined)
   console.log(courseData?.data,'full data');
@@ -29,8 +36,8 @@ const Courses = () => {
     {
       title: 'Action',
       key: "X",
-     render:(item)=>{
-      console.log(item);
+     render:(item:TFacultyInfo)=>{
+      console.log(item,'ety t dorkar');
       
       return(
         <AddFacultyModal  facultyInfo={item} />
@@ -58,7 +65,7 @@ const Courses = () => {
     <Table loading={isFetching} columns={columns} dataSource={tableData}  />
   );
 };
-const AddFacultyModal = ({facultyInfo})=>{
+const AddFacultyModal = ({facultyInfo}:TFacultyInfo2)=>{
   const {data:academicFacultyData} = useGetAllFacultyQuery(undefined)
   console.log(academicFacultyData?.data);
   const [addCourseFaculties,{data:update,error}] =useAddCourseFacultiesMutation()
