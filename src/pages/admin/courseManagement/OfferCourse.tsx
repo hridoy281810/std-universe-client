@@ -8,6 +8,8 @@ import { useAddOfferCourseMutation, useGetAllCoursesQuery, useGetAllFacultiesQue
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { daysOptions } from "../../../components/constants/course";
+import { toast } from "sonner";
+import { TResponse } from "../../../typs";
 
 type TFacultyDataOptions = {
   _id:string
@@ -49,15 +51,27 @@ const academicDepartmentOptions= academicDepartment?.data?.map((item)=> ({
     label: `${item.name} `
 }))
 console.log(academicFacultyOptions);
-  const onSubmit:SubmitHandler<FieldValues>=(data)=>{
+  const onSubmit:SubmitHandler<FieldValues>=async(data)=>{
+    const toastId = toast.loading("Creating...")
     const offerCourse = {
       ...data,
       section:Number(data.section),
       maxCapacity:Number(data.maxCapacity),
   
     }
-    console.log(offerCourse);
-    addOfferCourse(offerCourse)
+    try{
+     const res =  (await addOfferCourse(offerCourse))as TResponse<any>
+     if(res.error){
+       toast.error(`server error ${res.error.data.message}`,{id:toastId})
+     }else{
+       toast.success(res.data.message,{id:toastId})
+     }
+     
+   }catch(err){
+ toast.error("something went wrong",{id:toastId})
+ 
+   }
+  
     
   }
   return (
