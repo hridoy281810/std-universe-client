@@ -25,7 +25,7 @@ const StudentOfferedCourse = () => {
       const modifiedData = Object.values(singleObjectData? singleObjectData: {})
       console.log(modifiedData);
       
-      const handleEnroll =async (_id)=>{
+      const handleEnroll =async (_id:string)=>{
         const enrollData ={
             offeredCourse:_id
         }
@@ -52,14 +52,14 @@ const StudentOfferedCourse = () => {
         </div>
         <div >
             {
-                item?.sections?.map((section)=>(
+                item?.sections?.map((section:any)=>(
                   <Row 
                   justify="space-between"
                   align="middle"
                   style={{borderTop:'solid #d4d4d4 2px ',padding:'10px'}}
                   >
                     <Col span={4}>section: {section.section}</Col>
-                    <Col span={4}>Days: {section.days.map((day)=>(
+                    <Col span={4}>Days: {section.days.map((day:string)=>(
                         <span>{day},{' '}</span>
                     ))}</Col>
                     <Col span={4}>Start Time: {section.startTime}</Col>

@@ -1,10 +1,10 @@
 
  export type TMyOfferedCourse = {
     _id: string;
-    semesterRegistration: string;
-    academicSemester: string;
-    academicFaculty: string;
-    academicDepartment: string;
+    semesterRegistration: TSemesterRegistration;
+    academicSemester: TAcademicSemester;
+    academicFaculty: TAcademicFaculty;
+    academicDepartment: TAcademicDepartment;
     course: TCourse1;
     faculty: string;
     maxCapacity: number;
