@@ -81,7 +81,7 @@ if(extra.action === "filter"){
   }
   return (
     <>
-    <Table loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} pagination={false} />
+    <Table  scroll={{ x: 10}}loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} pagination={false} />
 <Pagination current={page}  onChange={(value)=> setPage(value)} pageSize={metaData?.limit} total={metaData?.total}/>
     </>
   );

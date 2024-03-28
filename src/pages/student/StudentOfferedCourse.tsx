@@ -6,7 +6,7 @@ type TAccCourse ={
 const StudentOfferedCourse = () => {
     const {data:offeredCourseData, isFetching,isLoading:Loading} = useGetAllMyOfferCoursesQuery(undefined)
     const [addEnrolledOfferCourse,{isLoading}] = useAddEnrolledOfferCourseMutation()
-    console.log(offeredCourseData);
+
       const singleObjectData = offeredCourseData?.data?.reduce((acc:TAccCourse,item)=>{
         const key = item.course.title
         acc[key] =acc[key]  || {courseTitle:key,sections:[]};
@@ -21,9 +21,8 @@ const StudentOfferedCourse = () => {
         })
         return acc
       },{})
-      console.log(singleObjectData,'etai t dorkar');
       const modifiedData = Object.values(singleObjectData? singleObjectData: {})
-      console.log(modifiedData);
+
       
       const handleEnroll =async (_id:string)=>{
         const enrollData ={

@@ -56,8 +56,7 @@ const columns: TableColumnsType<TTableData> = [
       <Space>
         <Link to={`/admin/students-data/${item.key}`}><Button >Details</Button></Link>
         <Link to={`/admin/update-student-data/${item.key}`}><Button >Update</Button></Link>
-        <Button>Update</Button>
-        <Button>Block</Button>
+
       </Space>
     )
    },
@@ -83,7 +82,7 @@ if(extra.action === "filter"){
   }
   return (
     <>
-    <Table loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} pagination={false} />
+    <Table  scroll={{ x: 10}}   loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} pagination={false} />
 <Pagination current={page}  onChange={(value)=> setPage(value)} pageSize={metaData?.limit} total={metaData?.total}/>
     </>
   );

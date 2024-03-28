@@ -14,6 +14,7 @@
     endTime: string;
     createdAt: string;
     updatedAt: string;
+    student: TStudent;
     __v: number;
     enrolledCourses: any[];
     completedCourses: any[];
@@ -48,7 +49,7 @@
     grade: string;
     gradePoints: number;
     isCompleted: boolean;
-  } | undefined
+  } 
   
   type TSemesterRegistration = {
     _id: string;

@@ -1,6 +1,5 @@
 
-import type { DatePickerProps } from 'antd';
-import { DatePicker, Space } from 'antd';
+import { DatePicker} from 'antd';
 import { Form} from 'antd';
 import { Controller } from 'react-hook-form';
 

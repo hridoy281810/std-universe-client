@@ -8,9 +8,7 @@ export const studentPaths = [
         path: 'dashboard',
         element: <StudentDashboard />
     },
-    {
-        name: 'Course Management',
-        children: [
+    
           {
             name:'Offered Course',
             path: "my-offered-course", 
@@ -21,6 +19,5 @@ export const studentPaths = [
             path: "my-schedule", 
             element: <MySchedule />,
           },
-        ]
-         }
+        
 ]

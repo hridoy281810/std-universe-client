@@ -6,6 +6,8 @@ import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
 import { bloodGroupsOptions, gendersOption } from "../../../../components/constants/global";
 import {FieldValues, SubmitHandler } from "react-hook-form";
 import { useAddAdminMutation } from "../../../../redux/features/admin/userManagement.api";
+import { TAdmin, TResponse } from "../../../../typs";
+import { toast } from "sonner";
 
 
 
@@ -36,8 +38,9 @@ const CreateAdmin = () => {
   const [addAdmin,{data,error}] = useAddAdminMutation()
   console.log(data,error);
   
-  const onSubmit:SubmitHandler<FieldValues> =(data)=>{
+  const onSubmit:SubmitHandler<FieldValues> =async(data)=>{
   console.log(data);
+  const toastId = toast.loading("Creating...")
   const adminData = {
     password:"admin123",
     admin :{
@@ -51,9 +54,18 @@ const CreateAdmin = () => {
   
   formData.append("data", JSON.stringify(adminData))
   //  formData.append('file', data.profileImg)
-  addAdmin(formData)
 
-  
+  // const toastId = toast.loading("Creating...")
+  try {
+    const res = await   addAdmin(formData) as TResponse<TAdmin[]>
+    if (res.error) {
+      toast.error(res.error.data.message, { id: toastId })
+    } else {
+      toast.success("Department Created", { id: toastId })
+    }
+  } catch (error) {
+    toast.error("something went wrong", { id: toastId })
+  }
    }
     
   return (
