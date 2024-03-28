@@ -7,71 +7,9 @@ import { bloodGroupsOptions, gendersOption } from "../../../../components/consta
 import StdUniDatePicker from "../../../../components/form/StdUniDatePicker";
 import { useGetAllDepartmentQuery, useGetAllSemesterQuery } from "../../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../../redux/features/admin/userManagement.api";
+import { TResponse, TStudent } from "../../../../typs";
+import { toast } from "sonner";
 
-
-const studentDummyData = {
-  "password": "student123",
-  "student": {
-      "name": {
-          "firstName": "I am ",
-          "middleName": "Student",
-          "lastName": "Number 1"
-      },
-      "gender": "male",
-      "dateOfBirth": "1990-01-01",
-      "bloodGroup": "A+",
-
-      "contactNo": "1235678",
-      "emergencyContactNo": "987-654-3210",
-      "presentAddress": "123 Main St, Cityville",
-      "permanentAddress": "456 Oak St, Townsville",
-      "guardian": {
-          "fatherName": "James Doe",
-          "fatherOccupation": "Engineer",
-          "fatherContactNo": "111-222-3333",
-          "motherName": "Mary Doe",
-          "motherOccupation": "Teacher",
-          "motherContactNo": "444-555-6666"
-      },
-      "localGuardian": {
-          "name": "Alice Johnson",
-          "occupation": "Doctor",
-          "contactNo": "777-888-9999",
-          "address": "789 Pine St, Villageton"
-      },
-      "admissionSemester": "65b0104110b74fcbd7a25d92",
-      "academicDepartment": "65b00fb010b74fcbd7a25d8e"
-  }
-}
-const  studentDefaultValues = {
-
-    "name": {
-        "firstName": "I am ",
-        "middleName": "Student",
-        "lastName": "Number 1"
-    },
-    "gender": "male",
-
-    "contactNo": "1235678",
-    "emergencyContactNo": "987-654-3210",
-    "presentAddress": "123 Main St, Cityville",
-    "permanentAddress": "456 Oak St, Townsville",
-    "guardian": {
-        "fatherName": "James Doe",
-        "fatherOccupation": "Engineer",
-        "fatherContactNo": "111-222-3333",
-        "motherName": "Mary Doe",
-        "motherOccupation": "Teacher",
-        "motherContactNo": "444-555-6666"
-    },
-    "localGuardian": {
-        "name": "Alice Johnson",
-        "occupation": "Doctor",
-        "contactNo": "777-888-9999",
-        "address": "789 Pine St, Villageton"
-    },
-
-}
 
 const CreateStudent = () => {
   const [addStudent, {data,error}] = useAddStudentMutation()
@@ -88,6 +26,7 @@ const departmentOptions =dData?.data?.map((item)=>({
   label: item.name
 }))
   const onSubmit : SubmitHandler<FieldValues>=async(data)=>{
+    const toastId = toast.loading("Creating...")
     console.log(data);
     const studentData = {
       password:'student123',
@@ -96,14 +35,24 @@ const departmentOptions =dData?.data?.map((item)=>({
     const formData = new FormData()
  formData.append('data',JSON.stringify(studentData))
 //  formData.append('file', data.profileImg)
- addStudent(formData)
- 
+
+   // const toastId = toast.loading("Creating...")
+   try {
+    const res = await addStudent(formData) as TResponse<TStudent[]>
+    if (res.error) {
+      toast.error(res.error.data.message, { id: toastId })
+    } else {
+      toast.success("Department Created", { id: toastId })
+    }
+  } catch (error) {
+    toast.error("something went wrong", { id: toastId })
+  }
   }
   return (
     
     <Row style={{display: "flex", justifyContent: 'center'}}>
       <Col>
-      <StdUniForm onSubmit={onSubmit} defaultValues={studentDefaultValues}>
+      <StdUniForm onSubmit={onSubmit} >
         <Divider>Personal Info</Divider>
       <Row gutter={8}>
         <Col span={24} md={{span: 12}} lg={{span: 8}}>

@@ -14,7 +14,6 @@ const items = [
     {label: 'Ended', key: 'ENDED'},
 ]
 const RegisteredSemesters = () => {
-//   const [params,setParams] = useState<TQueryParam[] | undefined>(undefined)
   const {data: semesterData,isLoading,isFetching} =  useGetAllRegisterSemesterQuery(undefined)
   const [semesterId,setSemesterId] = useState('')
   console.log(semesterId,'new');
@@ -37,7 +36,7 @@ const handleStatusUpdate = async(data:TSemester)=>{
     const toastId = toast.loading("Creating...")
     try{
       console.log(semesterData);
-      const res =  (await updateRegisteredSemester(updateData) )as TResponse<any>
+      const res =  (await updateRegisteredSemester(updateData) )as TResponse<TSemester>
       console.log(res);
       if(res.error){
         toast.error(`${res.error.data.message}`,{id:toastId})
@@ -51,7 +50,7 @@ const handleStatusUpdate = async(data:TSemester)=>{
     }
   
 }
-  const menuProps = {
+  const menuProps= {
     items,
     onClick: handleStatusUpdate  
   }
@@ -98,7 +97,6 @@ const columns: TableColumnsType<TTableData> = [
     key: "X",
    render:(item)=>{
     return(
-      
       <Dropdown menu={menuProps} trigger={['click']}>
         <Button onClick={()=> setSemesterId(item.key)
         }>Update</Button>
@@ -126,7 +124,7 @@ const columns: TableColumnsType<TTableData> = [
     return <p>Loading...</p>
   }
   return (
-    <Table loading={isFetching} columns={columns} dataSource={tableData}  />
+    <Table  scroll={{ x: 10}}loading={isFetching} columns={columns} dataSource={tableData}  />
   );
 };
 

@@ -62,7 +62,7 @@ const Courses = () => {
     return <p>Loading...</p>
   }
   return (
-    <Table loading={isFetching} columns={columns} dataSource={tableData}  />
+    <Table  scroll={{ x: 10}}loading={isFetching} columns={columns} dataSource={tableData}  />
   );
 };
 const AddFacultyModal = ({facultyInfo}:TFacultyInfo2)=>{

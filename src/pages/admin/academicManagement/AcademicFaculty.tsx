@@ -42,7 +42,7 @@ const columns: TableColumnsType<TTableData> = [
   }
   return (
  
-      <Table  columns={columns} dataSource={tableData}  />
+      <Table  scroll={{ x: 10}}   columns={columns} dataSource={tableData}  />
    
   );
 };

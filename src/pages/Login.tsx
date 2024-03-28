@@ -15,8 +15,8 @@ const Login = () => {
   // const {register} = useForm()
     const [login] = useLoginMutation()
     const defaultValues = {
-      id: "2026030001",
-      password: "123456"sdfasdf
+      id: "F-0004",
+      password: "123456"
     }
   const onSubmit = async(data: FieldValues) => {
     console.log(data);

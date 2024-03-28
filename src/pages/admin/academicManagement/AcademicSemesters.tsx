@@ -103,7 +103,7 @@ if(extra.action === "filter"){
     return <p>Loading...</p>
   }
   return (
-    <Table loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} />
+    <Table  scroll={{ x: 10}}loading={isFetching} columns={columns} dataSource={tableData} onChange={onChange} />
   );
 };
 

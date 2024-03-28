@@ -13,7 +13,7 @@ const sidebarItem = items.reduce((acc:TSidebarItem[],item)=>{
     }
     if(item.children){
       acc.push({
-        key: item.name,
+        key: item?.name!,
         label: item.name,
         children: item.children.map((child)=> {
           if(child.name){
